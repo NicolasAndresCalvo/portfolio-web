@@ -71,7 +71,8 @@ for (const file of readdirSync(SRC).filter((f) => f.endsWith('.md'))) {
   </defs>
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
   <rect width="${W}" height="8" fill="url(#ac)"/>
-  <circle cx="${W - 90}" cy="90" r="34" fill="none" stroke="url(#ac)" stroke-width="3" opacity="0.7"/>
+  <rect x="${W - 128}" y="48" width="64" height="64" rx="16" fill="url(#ac)"/>
+  <text x="${W - 96}" y="94" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" font-weight="800" fill="#07120f" text-anchor="middle">N</text>
   <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
     <text x="80" y="${startY - 56}" fill="#2dd4bf" font-size="24" font-weight="700" letter-spacing="3">${escapeXml(tag)}</text>
     ${titleSvg}

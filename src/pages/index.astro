@@ -63,9 +63,6 @@ const industries = [
       <ul class="case-list">
         {featured.map(({ entry: c, minutesRead }) => (
           <li class="case-card">
-            <a href={`/cases/${c.id}`} class="card-cover-link" tabindex="-1" aria-hidden="true">
-              <img class="card-cover" src={`/covers/${c.id}.png`} alt="" loading="lazy" width="1200" height="600" />
-            </a>
             <a class="title" href={`/cases/${c.id}`}>{c.data.title}</a>
             {c.data.summary && <p class="summary">{c.data.summary}</p>}
             <div class="case-meta">

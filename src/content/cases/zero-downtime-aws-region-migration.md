@@ -1,5 +1,5 @@
 ---
-title: "Zero-Downtime Across AWS Regions: The Decisions Behind Moving 33 Microservices"
+title: "Zero-Downtime Across AWS Regions: The Decisions Behind Moving 33 Production Microservices"
 date: 2025-06-01
 slug: zero-downtime-aws-region-migration
 draft: false
@@ -8,7 +8,7 @@ tags: ["aws", "migration", "zero-downtime", "terraform", "ci-cd", "cost-optimiza
 summary: "A region-to-region migration is sold as a redeploy. The hard part is everything the old region quietly assumed: a machine image baked per release, a self-hosted artifact server, and one load balancer per service. Here is how 33 microservices moved with no outage, and the decisions that made it possible."
 ---
 
-# Zero-Downtime Across AWS Regions: The Decisions Behind Moving 33 Microservices
+# Zero-Downtime Across AWS Regions: The Decisions Behind Moving 33 Production Microservices
 
 There is a comforting way to describe a cloud region migration. You have a stack running in region A, you stand it up in region B, you point traffic at the new one, and you switch the old one off. On a slide it is an arrow between two boxes.
 
