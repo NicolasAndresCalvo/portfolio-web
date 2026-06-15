@@ -82,11 +82,11 @@ const activeCerts = certs.filter((c) => c.active);
   .hero__text { flex: 1; min-width: 280px; }
   .hero__photo { border-radius: var(--radius); object-fit: cover; width: 180px; height: 180px; border: 2px solid var(--border); flex-shrink: 0; }
 
-  .logos { list-style: none; padding: 0; margin: .5rem 0 0; display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; align-items: center; }
-  .logos li span { font-weight: 700; letter-spacing: .02em; color: var(--fg-muted); font-size: 1.05rem; transition: color .15s; }
-  .logos li:hover span { color: var(--fg); }
-  .logos li img { opacity: .8; filter: grayscale(1); transition: opacity .15s, filter .15s; }
-  .logos li:hover img { opacity: 1; filter: none; }
+  .logos { list-style: none; padding: 0; margin: .8rem 0 0; display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+  .logos li { background: #fff; border-radius: 8px; height: 52px; padding: 0 1rem; display: flex; align-items: center; justify-content: center; transition: transform .12s; }
+  .logos li:hover { transform: translateY(-2px); }
+  .logos li img { max-height: 30px; width: auto; object-fit: contain; }
+  .logos li span { font-weight: 700; color: #1a1a1a; letter-spacing: .02em; }
 
   .certstrip { border: 1px solid var(--border); background: var(--bg-soft); border-radius: var(--radius); padding: 1rem 1.2rem; margin-top: 1rem; }
   .certstrip__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; font-size: .9rem; color: var(--fg-muted); }
