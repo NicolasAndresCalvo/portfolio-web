@@ -18,6 +18,9 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Skips cleanly until AWS CI is wired up. Set repo variable CI_ENABLED=true
+    # (and the AWS secrets/vars below) to turn deploys on.
+    if: vars.CI_ENABLED == 'true'
     steps:
       - uses: actions/checkout@v4
 
