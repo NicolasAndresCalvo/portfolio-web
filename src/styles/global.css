@@ -75,7 +75,7 @@ a.tag:hover { text-decoration: none; filter: brightness(1.35); }
 .prose pre { padding: 1rem; border-radius: var(--radius); overflow-x: auto; border: 1px solid var(--border); }
 .prose pre code { background: none; padding: 0; }
 .prose pre.mermaid { background: var(--bg-soft); text-align: center; line-height: 1.4; }
-.prose table { border-collapse: collapse; width: 100%; }
+.prose table { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; }
 .prose th, .prose td { border: 1px solid var(--border); padding: .5rem .7rem; text-align: left; }
 .prose hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 
@@ -86,3 +86,13 @@ a.tag:hover { text-decoration: none; filter: brightness(1.35); }
 /* About */
 .about-head { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.5rem; }
 .avatar { border-radius: 50%; border: 2px solid var(--border); object-fit: cover; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .site-header .wrap { height: auto; min-height: 56px; flex-wrap: wrap; gap: .35rem .9rem; padding-top: .55rem; padding-bottom: .55rem; }
+  .nav a { margin-left: 0; margin-right: 1.1rem; }
+  .hero { padding: 2.5rem 0 1.5rem; }
+  .hero h1 { font-size: 1.85rem; }
+  .section h2 { font-size: 1.25rem; }
+}
