@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nicolasandrescalvo.com/sitemap-index.xml

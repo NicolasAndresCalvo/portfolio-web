@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import { visit } from 'unist-util-visit';
+import sitemap from '@astrojs/sitemap';
 
 // Turn ```mermaid fenced code blocks into <pre class="mermaid"> so the client
 // mermaid runtime (loaded in BaseLayout) can render them. Keeps diagrams portable:
@@ -29,6 +30,7 @@ function remarkReadingTime() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nicolasandrescalvo.com',
+  integrations: [sitemap()],
   markdown: {
     remarkPlugins: [remarkMermaid, remarkReadingTime],
     shikiConfig: { theme: 'github-dark' },

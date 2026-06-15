@@ -69,7 +69,7 @@ a.tag:hover { text-decoration: none; filter: brightness(1.35); }
 .prose h1 { font-size: 2rem; line-height: 1.2; }
 .prose h2 { font-size: 1.45rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: .3rem; }
 .prose h3 { font-size: 1.15rem; margin-top: 1.6rem; }
-.prose img { max-width: 100%; border-radius: var(--radius); }
+.prose img { max-width: 100%; border-radius: var(--radius); display: block; margin: 1.25rem auto; }
 .prose blockquote { border-left: 3px solid var(--accent); margin: 1rem 0; padding: .2rem 1rem; color: var(--fg-muted); background: var(--bg-soft); border-radius: 0 var(--radius) var(--radius) 0; }
 .prose code { font-family: var(--mono); font-size: .9em; background: var(--bg-soft); padding: .15em .4em; border-radius: 5px; }
 .prose pre { padding: 1rem; border-radius: var(--radius); overflow-x: auto; border: 1px solid var(--border); }

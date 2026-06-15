@@ -78,6 +78,14 @@ const activeCerts = certs.filter((c) => c.active);
       </ul>
     </div>
   </section>
+
+  <section class="cta-band">
+    <div>
+      <h2>Open to new opportunities</h2>
+      <p>Looking for a cloud / platform engineer or architect? Let's talk.</p>
+    </div>
+    <a class="cta" href="mailto:nicolas.andres.calvo.engineer@gmail.com">Get in touch</a>
+  </section>
 </BaseLayout>
 
 <style>
@@ -88,6 +96,12 @@ const activeCerts = certs.filter((c) => c.active);
   .logos { list-style: none; padding: 0; margin: .8rem 0 0; display: flex; flex-wrap: wrap; gap: .6rem .9rem; align-items: center; }
   .logos li a, .logos li span { display: inline-block; border: 1px solid var(--border); border-radius: 999px; padding: .4rem 1rem; color: var(--fg-muted); font-weight: 600; font-size: .95rem; transition: color .15s, border-color .15s; }
   .logos li a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+
+  .cta-band { margin: 3rem 0 1rem; padding: 1.5rem 1.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; flex-wrap: wrap; }
+  .cta-band h2 { margin: 0; border: 0; font-size: 1.3rem; }
+  .cta-band p { margin: .35rem 0 0; color: var(--fg-muted); }
+  .cta-band .cta { background: var(--accent); color: #07120f; font-weight: 700; padding: .7rem 1.3rem; border-radius: var(--radius); white-space: nowrap; }
+  .cta-band .cta:hover { text-decoration: none; filter: brightness(1.1); }
 
   .certstrip { border: 1px solid var(--border); background: var(--bg-soft); border-radius: var(--radius); padding: 1rem 1.2rem; margin-top: 1rem; }
   .certstrip__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; font-size: .9rem; color: var(--fg-muted); }
