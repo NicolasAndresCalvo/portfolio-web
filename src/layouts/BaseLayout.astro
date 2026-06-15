@@ -39,9 +39,14 @@ const ogImage = new URL('/og.png', Astro.site);
     <Footer />
 
     <script>
-      // Render any ```mermaid blocks (converted to <pre class="mermaid"> at build time).
-      import mermaid from 'mermaid';
-      mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
+      // Load Mermaid only on pages that actually have a diagram, so the heavy
+      // bundle never ships on the home, list or about pages.
+      if (document.querySelector('pre.mermaid')) {
+        import('mermaid').then(async ({ default: mermaid }) => {
+          mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+          await mermaid.run({ querySelector: 'pre.mermaid' });
+        });
+      }
     </script>
   </body>
 </html>
