@@ -8,9 +8,10 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await render(entry);
+const { Content, remarkPluginFrontmatter, headings } = await render(entry);
 const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
 const minutesRead = remarkPluginFrontmatter.minutesRead;
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 ---
 <BaseLayout title={`${entry.data.title} · Nicolás Andrés Calvo`} description={entry.data.summary}>
   <article>
@@ -26,9 +27,32 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
         {entry.data.tags.map((t) => <a class="tag" href={`/tags/${t}`}>{t}</a>)}
       </div>
     </header>
+
+    {toc.length > 2 && (
+      <nav class="toc" aria-label="Table of contents">
+        <p class="toc__title">Table of contents</p>
+        <ul>
+          {toc.map((h) => (
+            <li class={h.depth === 3 ? 'toc__sub' : ''}><a href={`#${h.slug}`}>{h.text}</a></li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
     <div class="prose">
       <Content />
     </div>
     <a class="back-link" href="/cases">← All cases</a>
   </article>
 </BaseLayout>
+
+<style>
+  .toc { border: 1px solid var(--border); background: var(--bg-soft); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 1.5rem 0 .5rem; }
+  .toc__title { margin: 0 0 .6rem; font-weight: 700; font-size: .95rem; color: var(--fg); }
+  .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin: .25rem 0; }
+  .toc li a { color: var(--fg-muted); font-size: .95rem; }
+  .toc li a:hover { color: var(--accent); }
+  .toc__sub { padding-left: 1.1rem; }
+  .toc__sub a { font-size: .9rem; }
+</style>
