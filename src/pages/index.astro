@@ -29,23 +29,15 @@ const activeCerts = certs.filter((c) => c.active);
     <img class="hero__photo" src="/profile.jpg" width="180" height="180" alt="Nicolás Andrés Calvo" />
   </section>
 
-  <section class="certstrip">
-    <div class="certstrip__head">
-      <span><strong>CNCF Kubestronaut</strong> · {activeCerts.length} active certifications</span>
-      <a href="/certifications">View all →</a>
-    </div>
-    <ul class="certstrip__row">
-      {activeCerts.map((c) => (
-        <li><a href={c.url} title={c.name}><img src={c.image} width="52" height="52" loading="lazy" alt={c.name} /></a></li>
-      ))}
-    </ul>
-  </section>
-
   <section class="section">
     <h2>Worked with</h2>
     <ul class="logos">
       {companies.map((c) => (
-        <li><a href={c.url} target="_blank" rel="noopener noreferrer">{c.name}</a></li>
+        <li>
+          {c.url
+            ? <a href={c.url} target="_blank" rel="noopener noreferrer">{c.name}</a>
+            : <span>{c.name}</span>}
+        </li>
       ))}
     </ul>
   </section>
@@ -71,6 +63,18 @@ const activeCerts = certs.filter((c) => c.active);
       </ul>
     )}
   </section>
+
+  <section class="certstrip">
+    <div class="certstrip__head">
+      <span><strong>CNCF Kubestronaut</strong> · {activeCerts.length} active certifications</span>
+      <a href="/certifications">View all →</a>
+    </div>
+    <ul class="certstrip__row">
+      {activeCerts.map((c) => (
+        <li><a href={c.url} title={c.name}><img src={c.image} width="52" height="52" loading="lazy" alt={c.name} /></a></li>
+      ))}
+    </ul>
+  </section>
 </BaseLayout>
 
 <style>
@@ -79,7 +83,7 @@ const activeCerts = certs.filter((c) => c.active);
   .hero__photo { border-radius: var(--radius); object-fit: cover; width: 180px; height: 180px; border: 2px solid var(--border); flex-shrink: 0; }
 
   .logos { list-style: none; padding: 0; margin: .8rem 0 0; display: flex; flex-wrap: wrap; gap: .6rem .9rem; align-items: center; }
-  .logos li a { display: inline-block; border: 1px solid var(--border); border-radius: 999px; padding: .4rem 1rem; color: var(--fg-muted); font-weight: 600; font-size: .95rem; transition: color .15s, border-color .15s; }
+  .logos li a, .logos li span { display: inline-block; border: 1px solid var(--border); border-radius: 999px; padding: .4rem 1rem; color: var(--fg-muted); font-weight: 600; font-size: .95rem; transition: color .15s, border-color .15s; }
   .logos li a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
 
   .certstrip { border: 1px solid var(--border); background: var(--bg-soft); border-radius: var(--radius); padding: 1rem 1.2rem; margin-top: 1rem; }

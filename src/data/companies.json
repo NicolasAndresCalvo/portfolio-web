@@ -12,5 +12,9 @@
   { "name": "BICE Vida", "url": "https://www.bicevida.cl" },
   { "name": "ORBCOMM", "url": "https://www.orbcomm.com" },
   { "name": "AFP Capital", "url": "https://www.afpcapital.cl" },
-  { "name": "Cleverit Group", "url": "https://www.cleveritgroup.com" }
+  { "name": "Cleverit Group", "url": "https://www.cleveritgroup.com" },
+  { "name": "Porvenir", "url": "https://www.porvenir.com.co" },
+  { "name": "Nasini", "url": null },
+  { "name": "PMI", "url": null },
+  { "name": "Aument", "url": null }
 ]
