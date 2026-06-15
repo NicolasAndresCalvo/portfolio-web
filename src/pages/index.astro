@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import certs from '../data/certifications.json';
+import companies from '../data/companies.json';
 
 const cases = (await getCollection('cases', ({ data }) => import.meta.env.PROD ? !data.draft : true))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -13,7 +14,7 @@ const activeCerts = certs.filter((c) => c.active);
 <BaseLayout>
   <section class="hero">
     <div class="hero__text">
-      <h1>Cloud &amp; DevOps engineer architecting resilient infrastructure.</h1>
+      <h1>Cloud &amp; DevOps Engineer architecting resilient infrastructure.</h1>
       <p class="lead">
         I design and run cloud platforms on AWS, with Terraform and Kubernetes, turning fragile,
         expensive systems into resilient, well-architected ones. Here I write up the real decisions
@@ -36,6 +37,19 @@ const activeCerts = certs.filter((c) => c.active);
     <ul class="certstrip__row">
       {activeCerts.map((c) => (
         <li><a href={c.url} title={c.name}><img src={c.image} width="52" height="52" loading="lazy" alt={c.name} /></a></li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Worked with</h2>
+    <ul class="logos">
+      {companies.map((c) => (
+        <li>
+          {c.logo
+            ? <img src={c.logo} alt={c.name} height="28" loading="lazy" />
+            : <span>{c.name}</span>}
+        </li>
       ))}
     </ul>
   </section>
@@ -67,6 +81,12 @@ const activeCerts = certs.filter((c) => c.active);
   .hero { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
   .hero__text { flex: 1; min-width: 280px; }
   .hero__photo { border-radius: var(--radius); object-fit: cover; width: 180px; height: 180px; border: 2px solid var(--border); flex-shrink: 0; }
+
+  .logos { list-style: none; padding: 0; margin: .5rem 0 0; display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; align-items: center; }
+  .logos li span { font-weight: 700; letter-spacing: .02em; color: var(--fg-muted); font-size: 1.05rem; transition: color .15s; }
+  .logos li:hover span { color: var(--fg); }
+  .logos li img { opacity: .8; filter: grayscale(1); transition: opacity .15s, filter .15s; }
+  .logos li:hover img { opacity: 1; filter: none; }
 
   .certstrip { border: 1px solid var(--border); background: var(--bg-soft); border-radius: var(--radius); padding: 1rem 1.2rem; margin-top: 1rem; }
   .certstrip__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; font-size: .9rem; color: var(--fg-muted); }

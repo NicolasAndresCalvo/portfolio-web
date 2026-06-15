@@ -3,7 +3,13 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const { title = 'Nicolás Andrés Calvo', description = 'Cloud / DevOps Engineer. Production war-stories and architecture case studies.' } = Astro.props;
+const {
+  title = 'Nicolás Andrés Calvo',
+  description = 'Cloud & DevOps Engineer and Cloud Architect. Production case studies on AWS, Terraform and Kubernetes.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/profile.jpg', Astro.site);
 ---
 <!doctype html>
 <html lang="en">
@@ -11,8 +17,19 @@ const { title = 'Nicolás Andrés Calvo', description = 'Cloud / DevOps Engineer
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body>
     <Header />
