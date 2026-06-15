@@ -46,13 +46,7 @@ Zero downtime is not a feature you add at the end. It is a constraint that decid
 
 The cutover was Blue/Green across regions. A single delivery pipeline deployed to **both the old region and the new one at the same time**, health-checked both, and only shifted traffic once the new side was proven. If anything looked wrong, the old side was still live and serving.
 
-```mermaid
-flowchart LR
-  DEV["Developer push<br/>(usual Git workflow)"] --> BUILD["Build and test"]
-  BUILD --> PUB["Publish to the<br/>managed package repository"]
-  PUB --> DEP["Deploy to both regions<br/>in parallel (Blue/Green)"]
-  DEP --> HC["Automatic health check"]
-```
+![Blue/Green delivery pipeline deploying to both regions in parallel](/diagrams/zero-downtime-pipeline.svg)
 
 **The trade-off, stated honestly:** running two full infrastructures side by side means paying for the workload twice for as long as the overlap lasts. Zero downtime is worth that price, but the duplicated cost is real and has to be budgeted up front, with the overlap window kept as short as possible per service. This is the cost nobody puts on the migration slide.
 
