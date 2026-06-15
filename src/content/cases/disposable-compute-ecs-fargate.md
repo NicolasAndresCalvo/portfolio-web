@@ -2,7 +2,7 @@
 title: "Disposable Compute Is the Easy Part: Designing Volatile Architectures on ECS Fargate"
 date: 2026-06-15
 slug: disposable-compute-ecs-fargate
-draft: false
+draft: true
 role: "Cloud Engineer"
 tags: ["aws", "ecs-fargate", "terraform", "load-balancing", "observability", "platform-engineering"]
 summary: "Everyone repeats 'cattle, not pets'. But the container being disposable is the trivial part. The real work is making everything around it (how you create the next service, route to it, watch it and ship it) assume the machine is temporary. Here is how a cohort of services on ECS Fargate was designed that way."
