@@ -64,16 +64,19 @@ const activeCerts = certs.filter((c) => c.active);
     )}
   </section>
 
-  <section class="certstrip">
-    <div class="certstrip__head">
-      <span><strong>CNCF Kubestronaut</strong> · {activeCerts.length} active certifications</span>
-      <a href="/certifications">View all →</a>
+  <section class="section">
+    <h2>Certifications</h2>
+    <div class="certstrip">
+      <div class="certstrip__head">
+        <span><strong>CNCF Kubestronaut</strong> · {activeCerts.length} active certifications</span>
+        <a href="/certifications">View all →</a>
+      </div>
+      <ul class="certstrip__row">
+        {activeCerts.map((c) => (
+          <li><a href={c.url} title={c.name}><img src={c.image} width="52" height="52" loading="lazy" alt={c.name} /></a></li>
+        ))}
+      </ul>
     </div>
-    <ul class="certstrip__row">
-      {activeCerts.map((c) => (
-        <li><a href={c.url} title={c.name}><img src={c.image} width="52" height="52" loading="lazy" alt={c.name} /></a></li>
-      ))}
-    </ul>
   </section>
 </BaseLayout>
 
