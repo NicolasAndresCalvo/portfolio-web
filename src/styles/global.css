@@ -82,3 +82,7 @@ a.tag:hover { text-decoration: none; filter: brightness(1.35); }
 .article-header { padding-top: 2rem; }
 .article-header h1 { margin-bottom: .5rem; }
 .back-link { display: inline-block; margin: 1.5rem 0 0; color: var(--fg-muted); }
+
+/* About */
+.about-head { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.5rem; }
+.avatar { border-radius: 50%; border: 2px solid var(--border); object-fit: cover; }
