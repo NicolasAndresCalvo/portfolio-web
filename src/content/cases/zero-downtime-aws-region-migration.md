@@ -1,6 +1,6 @@
 ---
 title: "Zero-Downtime Across AWS Regions: The Decisions Behind Moving 33 Microservices"
-date: 2025-05-01
+date: 2025-06-01
 slug: zero-downtime-aws-region-migration
 draft: false
 role: "Cloud Engineer"
