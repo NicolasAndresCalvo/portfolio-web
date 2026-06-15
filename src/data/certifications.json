@@ -1,0 +1,186 @@
+[
+  {
+    "name": "Kubestronaut",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/cd6c6449-6814-4613-a2d3-13cf4ac5be4f/image.png",
+    "url": "https://www.credly.com/badges/31cb63f4-e705-458b-8786-171d0cd5f9ae",
+    "expires": null,
+    "active": true
+  },
+  {
+    "name": "Lifelong Learning 2026",
+    "issuer": "Certiprof",
+    "image": "https://images.credly.com/images/5e2afabf-62f3-48ae-bbed-7e57c2e78c6a/blob",
+    "url": "https://www.credly.com/badges/b596a276-b7b6-41c4-b52e-0e89c46250ca",
+    "expires": "2027-04-25",
+    "active": true
+  },
+  {
+    "name": "CNPA: Certified Cloud Native Platform Engineering Associate",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/bf3fc97e-a12c-4567-86ea-01639b9b15fb/blob",
+    "url": "https://www.credly.com/badges/ce80d59e-05ad-4567-b953-f0d8c3cd724a",
+    "expires": "2028-02-04",
+    "active": true
+  },
+  {
+    "name": "OTCA: OpenTelemetry Certified Associate",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/3d3f7131-83a4-4427-8a68-150ca90bcc23/blob",
+    "url": "https://www.credly.com/badges/76dcf56f-86c8-4089-b636-e9e9a873e1cc",
+    "expires": "2028-01-31",
+    "active": true
+  },
+  {
+    "name": "KCA: Kyverno Certified Associate",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/2592935a-d8fa-405d-b40a-711a75454fc2/image.png",
+    "url": "https://www.credly.com/badges/4acb790e-d75d-4691-8adc-46831f185f69",
+    "expires": "2028-01-09",
+    "active": true
+  },
+  {
+    "name": "CBA: Certified Backstage Associate",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/d84e4fb0-dc7f-4d79-b1eb-a8a973da4965/image.png",
+    "url": "https://www.credly.com/badges/7dd80abb-a882-4528-ab81-be13afc5ddca",
+    "expires": "2027-12-28",
+    "active": true
+  },
+  {
+    "name": "CCA: Cilium Certified Associate",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/729367b3-0344-4b00-a6da-53e1807f808a/image.png",
+    "url": "https://www.credly.com/badges/984a23b6-874d-43ec-9aee-1bdec488cdb5",
+    "expires": "2027-12-22",
+    "active": true
+  },
+  {
+    "name": "CAPA: Certified Argo Project Associate",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/12624f9e-6b4a-43f0-b7a2-afb2c6cf8059/image.png",
+    "url": "https://www.credly.com/badges/6aeb65c5-feee-41d4-a32f-a96c0cb52e47",
+    "expires": "2027-02-13",
+    "active": true
+  },
+  {
+    "name": "CGOA: Certified GitOps Associate",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/7219d055-4e97-439c-b244-8fbe885fa06b/image.png",
+    "url": "https://www.credly.com/badges/b2ce85b5-5daf-4804-870b-69530df25207",
+    "expires": "2027-02-04",
+    "active": true
+  },
+  {
+    "name": "KCNA: Kubernetes and Cloud Native Associate",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/f28f1d88-428a-47f6-95b5-7da1dd6c1000/KCNA_badge.png",
+    "url": "https://www.credly.com/badges/1c288ddb-4ba1-408d-b23b-8cfca059d823",
+    "expires": "2027-01-02",
+    "active": true
+  },
+  {
+    "name": "KCSA: Kubernetes and Cloud Native Security Associate",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/67dd8a95-8876-4051-9cb9-3d97c204f85a/image.png",
+    "url": "https://www.credly.com/badges/29953b34-6295-4ac5-bb85-eb0e72052436",
+    "expires": "2026-12-30",
+    "active": true
+  },
+  {
+    "name": "GitHub Copilot",
+    "issuer": "GitHub",
+    "image": "https://images.credly.com/images/6b924fae-3cd7-4233-b012-97413c62c85d/blob",
+    "url": "https://www.credly.com/badges/6f350fec-4ed3-4181-b90b-1f66bb9b0985",
+    "expires": "2027-10-02",
+    "active": true
+  },
+  {
+    "name": "GitHub Administration",
+    "issuer": "GitHub",
+    "image": "https://images.credly.com/images/34880f37-8ec8-4542-a78a-73ba6647208e/image.png",
+    "url": "https://www.credly.com/badges/f877bcfa-7ca2-46c3-970e-26c55fc95e18",
+    "expires": "2027-09-24",
+    "active": true
+  },
+  {
+    "name": "GitHub Advanced Security",
+    "issuer": "GitHub",
+    "image": "https://images.credly.com/images/c9ed294b-f8ac-48fa-a8c3-96dab1f110f2/image.png",
+    "url": "https://www.credly.com/badges/457848e0-2b64-4ed2-b0ad-b765a9a0ad12",
+    "expires": "2027-09-16",
+    "active": true
+  },
+  {
+    "name": "GitHub Actions",
+    "issuer": "GitHub",
+    "image": "https://images.credly.com/images/89efc3e7-842b-4790-b09b-9ea5efc71ec3/image.png",
+    "url": "https://www.credly.com/badges/dbf1e84d-69d8-45ca-9587-640ce278326f",
+    "expires": "2027-09-02",
+    "active": true
+  },
+  {
+    "name": "GitHub Foundations",
+    "issuer": "GitHub",
+    "image": "https://images.credly.com/images/024d0122-724d-4c5a-bd83-cfe3c4b7a073/image.png",
+    "url": "https://www.credly.com/badges/abeadf5b-cf51-44e9-967a-1807a4c2de50",
+    "expires": "2027-08-05",
+    "active": true
+  },
+  {
+    "name": "PCA: Prometheus Certified Associate",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/c34436dc-1cfd-4125-a862-35f9c86ca17f/image.png",
+    "url": "https://www.credly.com/badges/9be205d9-ce65-4c7d-8a61-a3a8d33817a6",
+    "expires": "2028-02-21",
+    "active": true
+  },
+  {
+    "name": "CKA: Certified Kubernetes Administrator",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/8b8ed108-e77d-4396-ac59-2504583b9d54/cka_from_cncfsite__281_29.png",
+    "url": "https://www.credly.com/badges/6ae1bb40-f484-4175-a135-056fe86dfeed",
+    "expires": "2026-02-16",
+    "active": false
+  },
+  {
+    "name": "CKAD: Certified Kubernetes Application Developer",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/cc8adc83-1dc6-4d57-8e20-22171247e052/blob",
+    "url": "https://www.credly.com/badges/719940f7-8289-4cec-83bc-bacb093cf70f",
+    "expires": "2026-01-19",
+    "active": false
+  },
+  {
+    "name": "CKS: Certified Kubernetes Security Specialist",
+    "issuer": "CNCF / Linux Foundation",
+    "image": "https://images.credly.com/images/9945dfcb-1cca-4529-85e6-db1be3782210/kubernetes-security-specialist-logo2.png",
+    "url": "https://www.credly.com/badges/4d63855c-10a0-4e2b-acec-ccc369cdd22a",
+    "expires": "2025-03-23",
+    "active": false
+  },
+  {
+    "name": "HashiCorp Certified: Terraform Associate (002)",
+    "issuer": "HashiCorp",
+    "image": "https://images.credly.com/images/cd038261-9d1c-4792-bc62-3a3b5bda175c/blob",
+    "url": "https://www.credly.com/badges/428fd0a6-3424-4350-b32b-29da0c338ec2",
+    "expires": "2024-03-03",
+    "active": false
+  },
+  {
+    "name": "AWS Certified Solutions Architect – Associate",
+    "issuer": "AWS",
+    "image": "https://images.credly.com/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png",
+    "url": "https://www.credly.com/badges/42a6c3cd-46c4-4994-9fc6-4eeecfc42a8e",
+    "expires": "2023-03-18",
+    "active": false
+  },
+  {
+    "name": "AWS Certified Cloud Practitioner",
+    "issuer": "AWS",
+    "image": "https://images.credly.com/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png",
+    "url": "https://www.credly.com/badges/8a3bdbf6-3ce9-40f5-adde-4576a7f40c42",
+    "expires": "2023-03-18",
+    "active": false
+  }
+]

@@ -1,25 +1,39 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import certs from '../data/certifications.json';
 
 const cases = (await getCollection('cases', ({ data }) => import.meta.env.PROD ? !data.draft : true))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const featured = cases.slice(0, 3);
 const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+
+const activeCerts = certs.filter((c) => c.active);
 ---
 <BaseLayout>
   <section class="hero">
     <h1>Cloud &amp; DevOps engineer who ships resilient infrastructure.</h1>
     <p class="lead">
-      I work on AWS, ECS Fargate, Terraform and Kubernetes, turning fragile, expensive
-      systems into stateless, disposable, observable ones. Here I write up the real
-      decisions and trade-offs behind that work.
+      I work on AWS, Terraform and Kubernetes, turning fragile, expensive systems into
+      resilient ones. Here I write up the real decisions and trade-offs behind that work.
     </p>
     <p class="links">
       <a href="/cases">Read the cases →</a>
       <a href="https://github.com/NicolasAndresCalvo">GitHub</a>
       <a href="https://www.linkedin.com/in/nicolas-andres-calvo/">LinkedIn</a>
     </p>
+  </section>
+
+  <section class="certstrip">
+    <div class="certstrip__head">
+      <span><strong>CNCF Kubestronaut</strong> · {activeCerts.length} active certifications</span>
+      <a href="/certifications">View all →</a>
+    </div>
+    <ul class="certstrip__row">
+      {activeCerts.map((c) => (
+        <li><a href={c.url} title={c.name}><img src={c.image} width="52" height="52" loading="lazy" alt={c.name} /></a></li>
+      ))}
+    </ul>
   </section>
 
   <section class="section">
@@ -44,3 +58,11 @@ const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'shor
     )}
   </section>
 </BaseLayout>
+
+<style>
+  .certstrip { border: 1px solid var(--border); background: var(--bg-soft); border-radius: var(--radius); padding: 1rem 1.2rem; margin-top: 1rem; }
+  .certstrip__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; font-size: .9rem; color: var(--fg-muted); }
+  .certstrip__row { list-style: none; display: flex; flex-wrap: wrap; gap: .6rem; padding: 0; margin: .9rem 0 0; }
+  .certstrip__row img { object-fit: contain; transition: transform .12s; }
+  .certstrip__row a:hover img { transform: scale(1.12); }
+</style>

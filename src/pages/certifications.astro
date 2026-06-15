@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import certs from '../data/certifications.json';
+
+const active = certs.filter((c) => c.active);
+const past = certs.filter((c) => !c.active);
+---
+<BaseLayout title="Certifications · Nicolás Andrés Calvo" description="Verified cloud-native, Kubernetes, GitHub and cloud certifications.">
+  <section class="section">
+    <h2>Certifications</h2>
+    <p style="color:var(--fg-muted)">
+      {active.length} active, verified badges. Click any to verify on Credly.
+      I'm a <a href="https://www.cncf.io/training/kubestronaut/">CNCF Kubestronaut</a>.
+    </p>
+
+    <ul class="badges">
+      {active.map((c) => (
+        <li class="badge">
+          <a href={c.url} title={`${c.name} — verify on Credly`}>
+            <img src={c.image} width="96" height="96" loading="lazy" alt={c.name} />
+            <span class="badge__name">{c.name}</span>
+            <span class="badge__issuer">{c.issuer}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    {past.length > 0 && (
+      <details class="past">
+        <summary>Previously certified ({past.length})</summary>
+        <ul class="badges badges--sm">
+          {past.map((c) => (
+            <li class="badge">
+              <a href={c.url} title={c.name}>
+                <img src={c.image} width="64" height="64" loading="lazy" alt={c.name} />
+                <span class="badge__name">{c.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .badges { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+  .badge a { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .4rem; padding: 1rem .75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); height: 100%; transition: border-color .15s; }
+  .badge a:hover { border-color: var(--accent); text-decoration: none; }
+  .badge img { object-fit: contain; }
+  .badge__name { font-size: .8rem; color: var(--fg); line-height: 1.3; }
+  .badge__issuer { font-size: .72rem; color: var(--fg-muted); }
+  .past { margin-top: 2.5rem; }
+  .past summary { cursor: pointer; color: var(--fg-muted); }
+  .badges--sm { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+</style>
