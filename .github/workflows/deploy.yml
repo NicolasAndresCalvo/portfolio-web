@@ -1,0 +1,51 @@
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# OIDC: assume an AWS role instead of storing long-lived keys.
+# The role is provisioned by the portfolio-infra repo (phase 2).
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Content (src/content/cases/*.md) is committed, so CI builds without the
+      # private workshop. build:ci skips the workshop sync step.
+      - run: npm run build:ci
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Sync to S3
+        run: aws s3 sync dist/ "s3://${{ vars.AWS_S3_BUCKET }}" --delete
+
+      - name: Invalidate CloudFront
+        if: vars.CLOUDFRONT_DISTRIBUTION_ID != ''
+        run: aws cloudfront create-invalidation --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" --paths "/*"
+
+# Required GitHub config (Settings > Secrets and variables > Actions):
+#   secret  AWS_DEPLOY_ROLE_ARN          arn:aws:iam::<acct>:role/portfolio-web-deploy
+#   var     AWS_REGION                   eu-west-1
+#   var     AWS_S3_BUCKET                <bucket from portfolio-infra output>
+#   var     CLOUDFRONT_DISTRIBUTION_ID   <distribution id, phase 2; leave unset for now>

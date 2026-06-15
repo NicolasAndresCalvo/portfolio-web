@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('cases', ({ data }) => import.meta.env.PROD ? !data.draft : true);
+  const tags = new Set();
+  for (const c of cases) for (const t of c.data.tags) tags.add(t);
+  return [...tags].map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      cases: cases
+        .filter((c) => c.data.tags.includes(tag))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
+}
+
+const { tag, cases } = Astro.props;
+const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+---
+<BaseLayout title={`${tag} · Topics · Nicolás Andrés Calvo`} description={`Writing tagged ${tag}.`}>
+  <section class="section">
+    <p class="back-link" style="margin:0 0 .5rem"><a href="/tags">← All topics</a></p>
+    <h2>Topic: <span class="tag">{tag}</span></h2>
+    <ul class="case-list">
+      {cases.map((c) => (
+        <li class="case-card">
+          <a class="title" href={`/cases/${c.id}`}>{c.data.title}</a>
+          {c.data.summary && <p class="summary">{c.data.summary}</p>}
+          <div class="case-meta">
+            <span>{fmt(c.data.date)}</span>
+            {c.data.draft && <span class="draft-badge">draft</span>}
+            {c.data.tags.slice(0, 5).map((t) => <a class="tag" href={`/tags/${t}`}>{t}</a>)}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

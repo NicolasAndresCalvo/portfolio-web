@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="About · Nicolás Andrés Calvo" description="Cloud / DevOps engineer.">
+  <section class="section">
+    <h2>About</h2>
+    <div class="prose">
+      <p>
+        I'm <strong>Nicolás Andrés Calvo</strong>, a Cloud / DevOps engineer. I work on AWS, ECS Fargate,
+        Terraform and Kubernetes, building infrastructure that is stateless, disposable and
+        observable, and migrating systems that aren't yet.
+      </p>
+      <p>
+        This site collects case studies from real engagements: the context, the architecture, the
+        decisions I made and what they cost. Names and figures in the public write-ups are
+        generalized; the goal is to show how I reason, not to leak anyone's internals.
+      </p>
+      <h3>Find me</h3>
+      <ul>
+        <li><a href="https://github.com/NicolasAndresCalvo">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/nicolas-andres-calvo/">LinkedIn</a></li>
+        <li><a href="/cv.pdf">Download CV (PDF)</a></li>
+      </ul>
+      <p style="color:var(--fg-muted);font-size:.9rem">
+        (CV link is a placeholder, drop <code>cv.pdf</code> into <code>public/</code> to enable it.)
+      </p>
+    </div>
+  </section>
+</BaseLayout>

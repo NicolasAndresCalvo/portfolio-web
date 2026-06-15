@@ -1,0 +1,84 @@
+:root {
+  --bg: #0d1117;
+  --bg-soft: #161b22;
+  --border: #21262d;
+  --fg: #e6edf3;
+  --fg-muted: #9da7b3;
+  --accent: #58a6ff;
+  --accent-soft: #1f6feb33;
+  --radius: 10px;
+  --maxw: 760px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  line-height: 1.65;
+  font-size: 17px;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header */
+.site-header { border-bottom: 1px solid var(--border); background: rgba(13,17,23,.85); position: sticky; top: 0; backdrop-filter: blur(8px); z-index: 10; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { font-weight: 700; color: var(--fg); font-size: 1.05rem; }
+.brand:hover { text-decoration: none; color: var(--accent); }
+.nav a { color: var(--fg-muted); margin-left: 1.25rem; font-size: .95rem; }
+.nav a:hover { color: var(--fg); text-decoration: none; }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--border); margin-top: 4rem; padding: 2rem 0; color: var(--fg-muted); font-size: .9rem; }
+.site-footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+
+/* Hero */
+.hero { padding: 4rem 0 2rem; }
+.hero h1 { font-size: 2.4rem; line-height: 1.15; margin: 0 0 1rem; }
+.hero p.lead { font-size: 1.2rem; color: var(--fg-muted); margin: 0 0 1.5rem; }
+.hero .links a { margin-right: 1rem; }
+
+/* Section */
+.section { padding: 2rem 0; }
+.section h2 { font-size: 1.4rem; border-bottom: 1px solid var(--border); padding-bottom: .4rem; }
+
+/* Case cards */
+.case-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+.case-card { border: 1px solid var(--border); background: var(--bg-soft); border-radius: var(--radius); padding: 1.1rem 1.25rem; transition: border-color .15s; }
+.case-card:hover { border-color: var(--accent); }
+.case-card a.title { font-size: 1.15rem; font-weight: 600; color: var(--fg); }
+.case-card a.title:hover { color: var(--accent); text-decoration: none; }
+.case-card .summary { color: var(--fg-muted); margin: .4rem 0 .6rem; }
+.case-meta { font-size: .82rem; color: var(--fg-muted); display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+.tag { display: inline-block; background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: .1rem .6rem; font-size: .75rem; }
+a.tag:hover { text-decoration: none; filter: brightness(1.35); }
+.draft-badge { background: #f0883e33; color: #f0883e; border-radius: 999px; padding: .1rem .6rem; font-size: .72rem; }
+
+/* Article (rendered markdown) */
+.prose { padding: 2rem 0 1rem; }
+.prose h1 { font-size: 2rem; line-height: 1.2; }
+.prose h2 { font-size: 1.45rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: .3rem; }
+.prose h3 { font-size: 1.15rem; margin-top: 1.6rem; }
+.prose img { max-width: 100%; border-radius: var(--radius); }
+.prose blockquote { border-left: 3px solid var(--accent); margin: 1rem 0; padding: .2rem 1rem; color: var(--fg-muted); background: var(--bg-soft); border-radius: 0 var(--radius) var(--radius) 0; }
+.prose code { font-family: var(--mono); font-size: .9em; background: var(--bg-soft); padding: .15em .4em; border-radius: 5px; }
+.prose pre { padding: 1rem; border-radius: var(--radius); overflow-x: auto; border: 1px solid var(--border); }
+.prose pre code { background: none; padding: 0; }
+.prose pre.mermaid { background: var(--bg-soft); text-align: center; line-height: 1.4; }
+.prose table { border-collapse: collapse; width: 100%; }
+.prose th, .prose td { border: 1px solid var(--border); padding: .5rem .7rem; text-align: left; }
+.prose hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+.article-header { padding-top: 2rem; }
+.article-header h1 { margin-bottom: .5rem; }
+.back-link { display: inline-block; margin: 1.5rem 0 0; color: var(--fg-muted); }
