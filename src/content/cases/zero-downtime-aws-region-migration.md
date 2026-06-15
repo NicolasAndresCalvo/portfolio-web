@@ -10,6 +10,8 @@ summary: "A region-to-region migration is sold as a redeploy. The hard part is e
 
 # Zero-Downtime Across AWS Regions: The Decisions Behind Moving 33 Production Microservices
 
+> **TL;DR** A region migration looks like a redeploy. The hard part is everything the old region quietly assumed. 33 production microservices moved with **zero downtime**, releases went from **30 minutes to 3**, and a single shared load balancer cut that cost by about **90%**. Below are the decisions that made it possible, and the ones that hurt.
+
 There is a comforting way to describe a cloud region migration. You have a stack running in region A, you stand it up in region B, you point traffic at the new one, and you switch the old one off. On a slide it is an arrow between two boxes.
 
 That picture is wrong in the way that matters. The destination is rarely the hard part. The hard part is everything the old region quietly assumed, and the fact that you are not allowed to stop serving customers while you unwind those assumptions.
