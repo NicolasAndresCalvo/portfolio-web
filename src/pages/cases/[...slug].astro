@@ -28,6 +28,8 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       </div>
     </header>
 
+    <img class="cover" src={`/covers/${entry.id}.png`} alt={entry.data.title} width="1200" height="600" />
+
     {toc.length > 2 && (
       <nav class="toc" aria-label="Table of contents">
         <p class="toc__title">Table of contents</p>
@@ -55,4 +57,5 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
   .toc li a:hover { color: var(--accent); }
   .toc__sub { padding-left: 1.1rem; }
   .toc__sub a { font-size: .9rem; }
+  .cover { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); margin: 1.25rem 0 .5rem; }
 </style>
