@@ -33,6 +33,12 @@ const industries = [
         <a href="https://github.com/NicolasAndresCalvo">GitHub</a>
         <a href="https://www.linkedin.com/in/nicolas-andres-calvo/">LinkedIn</a>
       </p>
+      <ul class="hero-stats">
+        <li><strong>10+</strong> years</li>
+        <li><strong>{activeCerts.length}</strong> certifications</li>
+        <li><strong>{companies.length}</strong> companies</li>
+        <li>CNCF Kubestronaut</li>
+      </ul>
     </div>
     <img class="hero__photo" src="/profile.jpg" width="180" height="180" alt="Nicolás Andrés Calvo" />
   </section>
@@ -105,6 +111,8 @@ const industries = [
   .hero { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
   .hero__text { flex: 1; min-width: 280px; }
   .hero__photo { border-radius: var(--radius); object-fit: cover; width: 180px; height: 180px; border: 2px solid var(--border); flex-shrink: 0; }
+  .hero-stats { list-style: none; padding: 0; margin: 1.25rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; color: var(--fg-muted); font-size: .95rem; }
+  .hero-stats strong { color: var(--accent); font-weight: 800; }
 
   .logos { list-style: none; padding: 0; margin: .8rem 0 0; display: flex; flex-wrap: wrap; gap: .6rem .9rem; align-items: center; }
   .logos li a, .logos li span { display: inline-block; border: 1px solid var(--border); border-radius: 999px; padding: .4rem 1rem; color: var(--fg-muted); font-weight: 600; font-size: .95rem; transition: color .15s, border-color .15s; }
