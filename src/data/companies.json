@@ -1,12 +1,16 @@
 [
-  { "name": "Iberia", "logo": "/logos/iberia.png" },
-  { "name": "Inditex", "logo": "/logos/inditex.webp" },
-  { "name": "AXA", "logo": "/logos/axa.png" },
-  { "name": "Accenture", "logo": "/logos/accenture.png" },
-  { "name": "Ripley", "logo": "/logos/ripley.png" },
-  { "name": "Bupa", "logo": "/logos/bupa.png" },
-  { "name": "BICE Vida", "logo": "/logos/bicevida.jpeg" },
-  { "name": "AFP Capital", "logo": "/logos/afp.jpeg" },
-  { "name": "ORBCOMM", "logo": "/logos/orbcomm.png" },
-  { "name": "Cleverit Group", "logo": "/logos/cleverit.jpeg" }
+  { "name": "Iberia", "url": "https://www.iberia.com" },
+  { "name": "Inditex", "url": "https://www.inditex.com" },
+  { "name": "AXA", "url": "https://www.axa.com" },
+  { "name": "Ericsson", "url": "https://www.ericsson.com" },
+  { "name": "Accenture", "url": "https://www.accenture.com" },
+  { "name": "Endava", "url": "https://www.endava.com" },
+  { "name": "Banco Ripley", "url": "https://www.bancoripley.cl" },
+  { "name": "Ualá", "url": "https://www.uala.com.ar" },
+  { "name": "Agrofy", "url": "https://www.agrofy.com.ar" },
+  { "name": "Bupa", "url": "https://www.bupa.com" },
+  { "name": "BICE Vida", "url": "https://www.bicevida.cl" },
+  { "name": "ORBCOMM", "url": "https://www.orbcomm.com" },
+  { "name": "AFP Capital", "url": "https://www.afpcapital.cl" },
+  { "name": "Cleverit Group", "url": "https://www.cleveritgroup.com" }
 ]
