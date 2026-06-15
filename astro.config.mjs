@@ -15,12 +15,22 @@ function remarkMermaid() {
   };
 }
 
+// Estimate reading time from word count and expose it as frontmatter.
+function remarkReadingTime() {
+  return (tree, file) => {
+    let words = 0;
+    visit(tree, 'text', (node) => {
+      words += node.value.trim().split(/\s+/).filter(Boolean).length;
+    });
+    file.data.astro.frontmatter.minutesRead = Math.max(1, Math.round(words / 200));
+  };
+}
+
 // https://astro.build/config
 export default defineConfig({
-  // TODO: set this to your real domain once Cloudflare Pages is wired up.
-  site: 'https://nicolascalvo.dev',
+  site: 'https://nicolasandrescalvo.com',
   markdown: {
-    remarkPlugins: [remarkMermaid],
+    remarkPlugins: [remarkMermaid, remarkReadingTime],
     shikiConfig: { theme: 'github-dark' },
   },
 });

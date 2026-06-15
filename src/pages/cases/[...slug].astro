@@ -8,14 +8,16 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, remarkPluginFrontmatter } = await render(entry);
 const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+const minutesRead = remarkPluginFrontmatter.minutesRead;
 ---
 <BaseLayout title={`${entry.data.title} · Nicolás Andrés Calvo`} description={entry.data.summary}>
   <article>
     <header class="article-header">
       <div class="case-meta">
         <span>{fmt(entry.data.date)}</span>
+        <span>· {minutesRead} min read</span>
         {entry.data.client && <span>· {entry.data.client}</span>}
         {entry.data.role && <span>· {entry.data.role}</span>}
         {entry.data.draft && <span class="draft-badge">draft</span>}

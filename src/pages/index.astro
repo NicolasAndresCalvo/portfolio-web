@@ -12,16 +12,19 @@ const activeCerts = certs.filter((c) => c.active);
 ---
 <BaseLayout>
   <section class="hero">
-    <h1>Cloud &amp; DevOps engineer who ships resilient infrastructure.</h1>
-    <p class="lead">
-      I work on AWS, Terraform and Kubernetes, turning fragile, expensive systems into
-      resilient ones. Here I write up the real decisions and trade-offs behind that work.
-    </p>
-    <p class="links">
-      <a href="/cases">Read the cases →</a>
-      <a href="https://github.com/NicolasAndresCalvo">GitHub</a>
-      <a href="https://www.linkedin.com/in/nicolas-andres-calvo/">LinkedIn</a>
-    </p>
+    <div class="hero__text">
+      <h1>Cloud &amp; DevOps engineer who ships resilient infrastructure.</h1>
+      <p class="lead">
+        I work on AWS, Terraform and Kubernetes, turning fragile, expensive systems into
+        resilient ones. Here I write up the real decisions and trade-offs behind that work.
+      </p>
+      <p class="links">
+        <a href="/cases">Read the cases →</a>
+        <a href="https://github.com/NicolasAndresCalvo">GitHub</a>
+        <a href="https://www.linkedin.com/in/nicolas-andres-calvo/">LinkedIn</a>
+      </p>
+    </div>
+    <img class="hero__photo" src="/profile.jpg" width="180" height="180" alt="Nicolás Andrés Calvo" />
   </section>
 
   <section class="certstrip">
@@ -60,6 +63,10 @@ const activeCerts = certs.filter((c) => c.active);
 </BaseLayout>
 
 <style>
+  .hero { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .hero__text { flex: 1; min-width: 280px; }
+  .hero__photo { border-radius: var(--radius); object-fit: cover; width: 180px; height: 180px; border: 2px solid var(--border); flex-shrink: 0; }
+
   .certstrip { border: 1px solid var(--border); background: var(--bg-soft); border-radius: var(--radius); padding: 1rem 1.2rem; margin-top: 1rem; }
   .certstrip__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; font-size: .9rem; color: var(--fg-muted); }
   .certstrip__row { list-style: none; display: flex; flex-wrap: wrap; gap: .6rem; padding: 0; margin: .9rem 0 0; }

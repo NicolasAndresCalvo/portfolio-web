@@ -1,9 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
-const cases = (await getCollection('cases', ({ data }) => import.meta.env.PROD ? !data.draft : true))
+const raw = (await getCollection('cases', ({ data }) => import.meta.env.PROD ? !data.draft : true))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const cases = await Promise.all(raw.map(async (c) => {
+  const { remarkPluginFrontmatter } = await render(c);
+  return { entry: c, minutesRead: remarkPluginFrontmatter.minutesRead };
+}));
 const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 ---
 <BaseLayout title="Cases · Nicolás Andrés Calvo" description="Engineering case studies: architecture, migrations and production war-stories.">
@@ -16,13 +20,13 @@ const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'shor
       <p>No published cases yet. Run <code>npm run sync</code> to pull them from the workshop.</p>
     ) : (
       <ul class="case-list">
-        {cases.map((c) => (
+        {cases.map(({ entry: c, minutesRead }) => (
           <li class="case-card">
             <a class="title" href={`/cases/${c.id}`}>{c.data.title}</a>
             {c.data.summary && <p class="summary">{c.data.summary}</p>}
             <div class="case-meta">
               <span>{fmt(c.data.date)}</span>
-              {c.data.client && <span>· {c.data.client}</span>}
+              <span>· {minutesRead} min read</span>
               {c.data.draft && <span class="draft-badge">draft</span>}
               {c.data.tags.slice(0, 5).map((t) => <a class="tag" href={`/tags/${t}`}>{t}</a>)}
             </div>
