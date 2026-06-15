@@ -1,6 +1,6 @@
 ---
 title: "Disposable Compute Is the Easy Part: Designing Volatile Architectures on ECS Fargate"
-date: 2025-10-01
+date: 2026-06-15
 slug: disposable-compute-ecs-fargate
 draft: false
 role: "Cloud Engineer"
