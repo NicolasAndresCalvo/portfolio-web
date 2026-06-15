@@ -12,15 +12,30 @@ const tags = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeComp
 <BaseLayout title="Topics · Nicolás Andrés Calvo" description="Browse the writing by topic.">
   <section class="section">
     <h2>Topics</h2>
-    <p style="color:var(--fg-muted)">Browse the writing by topic.</p>
+    <p class="lead-muted">Browse the writing by topic, {tags.length} in total.</p>
+
     {tags.length === 0 ? (
       <p>No topics yet.</p>
     ) : (
-      <div class="case-meta" style="font-size:.95rem">
+      <ul class="topic-grid">
         {tags.map(([tag, count]) => (
-          <a class="tag" href={`/tags/${tag}`}>{tag} <span style="opacity:.7">({count})</span></a>
+          <li>
+            <a href={`/tags/${tag}`}>
+              <span class="topic-name">{tag}</span>
+              <span class="topic-count">{count}</span>
+            </a>
+          </li>
         ))}
-      </div>
+      </ul>
     )}
   </section>
 </BaseLayout>
+
+<style>
+  .lead-muted { color: var(--fg-muted); margin: 0 0 1.5rem; }
+  .topic-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .75rem; }
+  .topic-grid a { display: flex; align-items: center; justify-content: space-between; gap: .75rem; border: 1px solid var(--border); background: var(--bg-soft); border-radius: var(--radius); padding: .85rem 1.1rem; transition: border-color .15s, transform .15s; }
+  .topic-grid a:hover { border-color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+  .topic-name { color: var(--fg); font-weight: 600; }
+  .topic-count { background: var(--accent-soft); color: var(--accent); border-radius: 999px; min-width: 1.6rem; text-align: center; padding: .1rem .5rem; font-size: .8rem; font-weight: 700; }
+</style>
