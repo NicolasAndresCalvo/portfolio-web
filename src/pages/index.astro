@@ -13,6 +13,11 @@ const featured = await Promise.all(cases.slice(0, 3).map(async (c) => {
 const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 
 const activeCerts = certs.filter((c) => c.active);
+
+const industries = [
+  "Airlines", "Retail & Fashion", "Insurance", "Banking & Fintech",
+  "Pension Funds", "Telecom", "IoT & Satellite", "Healthcare", "Agtech",
+];
 ---
 <BaseLayout>
   <section class="hero">
@@ -42,6 +47,11 @@ const activeCerts = certs.filter((c) => c.active);
             : <span>{c.name}</span>}
         </li>
       ))}
+    </ul>
+
+    <h3 class="industries-title">Industries</h3>
+    <ul class="industries">
+      {industries.map((i) => <li>{i}</li>)}
     </ul>
   </section>
 
@@ -99,6 +109,10 @@ const activeCerts = certs.filter((c) => c.active);
   .logos { list-style: none; padding: 0; margin: .8rem 0 0; display: flex; flex-wrap: wrap; gap: .6rem .9rem; align-items: center; }
   .logos li a, .logos li span { display: inline-block; border: 1px solid var(--border); border-radius: 999px; padding: .4rem 1rem; color: var(--fg-muted); font-weight: 600; font-size: .95rem; transition: color .15s, border-color .15s; }
   .logos li a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+
+  .industries-title { margin: 1.5rem 0 .6rem; font-size: 1rem; color: var(--fg-muted); font-weight: 600; }
+  .industries { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .industries li { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: .3rem .85rem; font-size: .9rem; }
 
   .cta-band { margin: 3rem 0 1rem; padding: 1.5rem 1.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; flex-wrap: wrap; }
   .cta-band h2 { margin: 0; border: 0; font-size: 1.3rem; }
