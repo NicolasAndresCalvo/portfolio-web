@@ -1,31 +1,50 @@
 ---
-title: "Deploying a Static Site to AWS with Terraform and GitHub OIDC"
-date: 2026-06-15
+title: "A Production-Grade Site for $0.50 a Month: Terraform + GitHub OIDC on AWS"
+date: 2026-06-16
 slug: terraform-github-oidc-static-site
 draft: false
 role: "Personal project"
 tags: ["aws", "terraform", "github-actions", "ci-cd", "cloudfront"]
-summary: "The lazy way to deploy from CI is to paste an AWS access key into a GitHub secret. Here is how this very site ships instead: short-lived OIDC credentials, remote state, and a pipeline that plans on a PR and applies on merge, plus the two gotchas that cost me an afternoon."
+summary: "HTTPS, a global CDN, infrastructure as code, deploys on every git push, and not one leakable secret, for about fifty cents a month. Here is the whole build, the cost breakdown, and the two gotchas that cost me an afternoon."
 ---
 
-# Deploying a Static Site to AWS with Terraform and GitHub OIDC
+# A Production-Grade Site for $0.50 a Month: Terraform + GitHub OIDC on AWS
 
-The fast way to deploy from CI is to create an AWS access key, paste it into a GitHub secret, and move on. It works in five minutes. It is also a long-lived credential with standing permissions sitting in a settings page, and it will still be there, valid, the day someone leaks a workflow log.
+> **TL;DR** This site runs on AWS with HTTPS, a global CDN, and a pipeline that deploys on every push, using **short-lived credentials and zero stored keys**. Infrastructure cost: **about $0.50 a month**. The whole thing is Terraform, and the repo is public.
 
-This site (the one you are reading) deploys without a single static key. The pipeline authenticates to AWS with short-lived credentials it requests per run, scoped to one repository. Here is the whole setup, and the two gotchas that turned a quick job into an afternoon.
+Two beliefs cost teams real money and real risk. The first: production hosting is expensive. The second: the way to deploy from CI is to paste an AWS access key into a secret and move on. Both are wrong, and this site is the proof.
+
+It serves over HTTPS from a global CDN, deploys itself on every `git push`, and authenticates to AWS with credentials that expire when the job ends. There is no long-lived key anywhere to leak. It costs roughly **fifty cents a month**. Here is exactly how, including the cost breakdown and the two gotchas.
 
 ## In plain terms
 
-Instead of handing CI a permanent key to the house, you give it the right to ask a guard for a key that works for a few minutes and only opens one door. Every run asks again. There is nothing to leak, because there is no lasting key to steal.
+Instead of giving the deploy robot a permanent key to the building, you give it the right to ask a guard for a key that works for a few minutes and opens one door. Every deploy asks again. Nothing lasting exists to steal. And the "building" is rented by the request, so an empty site costs almost nothing.
 
-## What gets deployed
+## What you get
 
-The site is static files. The infrastructure around them, all in Terraform:
+- 🔒 **HTTPS** on a custom domain, certificate auto-renewed.
+- 🌍 **Global CDN** (CloudFront) in front of a **private** bucket.
+- 🧱 **All Terraform**, in a public repo, reviewed as pull requests.
+- 🤖 **Deploys on push** to `main`, no human in the loop.
+- 🔑 **No static AWS keys** anywhere: short-lived OIDC credentials per run.
+- 💸 **~$0.50/month.**
 
-- **S3** holds the built site, as a private bucket.
-- **CloudFront** serves it over HTTPS, with the bucket locked behind an Origin Access Control so it is not public.
-- **ACM** issues the TLS certificate (in us-east-1, which CloudFront requires).
-- **Route53** points the apex and www at the distribution.
+## What it costs
+
+The number that sells this: a production-grade setup, for the price of a coffee per year.
+
+| Piece | Cost |
+|------|------|
+| Route53 hosted zone | $0.50 / month |
+| S3 (storage + requests) | a few cents |
+| CloudFront | $0 (the 1 TB/month free tier covers a portfolio) |
+| ACM certificate | free |
+| **Infrastructure total** | **~$0.50 / month** |
+| Domain (.com), separate | ~$12 / year |
+
+CloudFront's perpetual free tier (1 TB out and 10M requests a month) means a personal or small-business site effectively pays nothing for delivery. The only standing charge is the Route53 hosted zone. That is the whole bill.
+
+## The architecture
 
 ```mermaid
 flowchart TB
@@ -34,50 +53,50 @@ flowchart TB
   CF -->|"Origin Access Control"| S3["S3 (private bucket)"]
 ```
 
-## Decision 1: OIDC instead of stored keys
+Static files in a private bucket, a CDN putting them behind HTTPS and the domain. Nothing is public except CloudFront.
 
-GitHub Actions can present a signed OpenID Connect token to AWS. You create an IAM role whose trust policy accepts that token, but only from your repository, and the workflow assumes the role at runtime. AWS hands back temporary credentials that expire when the job ends.
+## OIDC instead of stored keys
+
+GitHub Actions can present a signed OpenID Connect token to AWS. You create an IAM role that trusts that token, but only from your repository, and the workflow assumes it at runtime. AWS returns temporary credentials that die with the job.
 
 ```mermaid
 flowchart LR
-  GH["GitHub Actions job"] -->|"OIDC token (repo-scoped)"| AWS["AWS STS"]
-  AWS -->|"short-lived credentials"| GH
+  GH["GitHub Actions job"] -->|"OIDC token (repo-scoped)"| STS["AWS STS"]
+  STS -->|"short-lived credentials"| GH
   GH -->|"terraform apply / s3 sync"| INFRA["AWS resources"]
 ```
 
-No keys are stored anywhere. The trust is scoped with a condition on the token's `sub` claim, so only this repo (and the branches I choose) can assume the role. Leaking a build log leaks nothing reusable.
+Nothing is stored. The trust is scoped with a condition on the token, so only this repo can assume the role. Leak a build log and you leak nothing reusable. This is the single highest-leverage security upgrade most pipelines are missing, and it is a one-time setup.
 
-## Decision 2: remote state, and the bootstrap chicken-and-egg
+## Remote state, and the bootstrap chicken-and-egg
 
-For the pipeline to run Terraform, two things must already exist: somewhere to keep state (an S3 backend plus a lock table) and the OIDC role itself. Neither can be created by the pipeline that depends on them.
+For the pipeline to run Terraform, two things must already exist: a state backend (an S3 bucket plus a lock table) and the OIDC role itself. Neither can be created by the pipeline that needs them.
 
-So there is a small, separate **bootstrap** that runs once, locally, with my own credentials. It creates the state bucket, the lock table, the GitHub OIDC provider and the roles, and nothing else. After that, the bootstrap is never touched and everything else flows through CI. One deliberate manual step buys a fully automated pipeline forever after.
+So a small **bootstrap** runs once, locally, and creates exactly those: state bucket, lock table, OIDC provider, roles. After that it is never touched. One deliberate manual step buys a fully automated pipeline forever.
 
-## Decision 3: plans on a PR, applies on merge
+## Plan on a PR, apply on merge
 
-The workflow is boring on purpose, which is the highest compliment infrastructure can earn:
+- **Pull request:** CI runs `fmt`, `validate` and `plan`, so every change is a reviewable diff.
+- **Merge to `main`:** CI runs `apply` with the OIDC role.
 
-- Open a pull request: CI runs `fmt`, `validate` and `plan`, so the change is reviewable as a diff.
-- Merge to `main`: CI runs `apply` with the OIDC role.
-
-The state lives in the shared backend, so local and CI never fight over it. Infrastructure changes the same way application code does: through a reviewed pull request, not a console.
+Infrastructure changes the same way code does: through review, not a console. (I felt the payoff first-hand: my local AWS session expired mid-project, I pushed anyway, and CI deployed it with no credentials of mine involved.)
 
 ## The two gotchas
 
-**1. A private bucket behind CloudFront does not serve directory indexes.** With S3 static-website hosting, requesting `/cases/` quietly returns `/cases/index.html`. Lock the bucket behind an Origin Access Control and that convenience disappears: the REST origin gets asked for an object literally named `cases/` and returns nothing. The fix is a tiny CloudFront Function on the viewer request that appends `index.html` to directory-style paths. Obvious in hindsight, invisible until every nested page 404s.
+**1. A private bucket behind CloudFront does not serve directory indexes.** With S3 website hosting, `/cases/` quietly returns `/cases/index.html`. Lock the bucket behind an Origin Access Control and that magic disappears: the origin gets asked for an object named `cases/` and returns nothing. Fix: a tiny CloudFront Function on the viewer request that appends `index.html` to directory paths. Invisible until every nested page 404s.
 
-**2. ACM validation hung because the domain pointed at the wrong zone.** The certificate sat in `PENDING_VALIDATION` forever. The DNS validation records were correct and matched what ACM expected exactly, but they would not resolve on the public internet. The cause: the registered domain delegated to an old set of nameservers, not the hosted zone Terraform was writing to. The tell was simple once I looked: the records were right in the zone, but `dig @8.8.8.8` returned nothing, which means "the world is not looking at this zone." Repointing the domain's nameservers fixed it in minutes. Lesson: when DNS validation stalls, stop staring at the record values and check the delegation first.
+**2. ACM validation hung because the domain pointed at the wrong zone.** The certificate sat in `PENDING_VALIDATION` forever. The validation records were correct and matched what ACM expected, but they would not resolve publicly. The domain delegated to an old set of nameservers, not the zone Terraform was writing to. The tell: the records were right in the zone, but `dig @8.8.8.8` returned nothing, which means the world is not looking at this zone. Repointing the nameservers fixed it in minutes. When DNS validation stalls, check the delegation before the values.
 
 ## What I would do differently
 
-Codify the domain's nameserver delegation in Terraform too (it is currently set once by hand), so it cannot drift back to an old zone and reintroduce exactly the failure above.
+Codify the domain's nameserver delegation in Terraform too, so it cannot drift back to an old zone and reintroduce that exact failure.
 
-## The transferable lesson
+## The lesson
 
-"Put the key in a secret" is the default, and defaults are where risk accumulates. OIDC turns CI authentication from a stored secret into a short-lived, scoped request, and it is not meaningfully harder to set up once you have done it once. Pair it with remote state and a PR-driven pipeline and the whole thing becomes the boring, auditable, leak-resistant baseline that infrastructure should be.
+"Production-grade" and "expensive" are not the same thing, and "convenient" and "secure" do not have to trade off. Static hosting on a CDN is pennies. OIDC turns CI auth from a stored secret into a short-lived, scoped request. Put them together with Terraform and a PR-driven pipeline and you get the boring, auditable, leak-resistant, near-free baseline that every project deserves.
 
 > The Terraform for this site is public: [github.com/NicolasAndresCalvo/portfolio-infra](https://github.com/NicolasAndresCalvo/portfolio-infra).
 
 ---
 
-*A personal project. No account identifiers or secrets are included.*
+*A personal project. No account identifiers or secrets are included. Prices are AWS list-price approximations.*

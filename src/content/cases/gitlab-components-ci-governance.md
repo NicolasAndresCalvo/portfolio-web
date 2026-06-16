@@ -2,7 +2,7 @@
 title: "GitLab Components for Governance: Standardizing CI Across an Org"
 date: 2026-05-01
 slug: gitlab-components-ci-governance
-draft: false
+draft: true
 role: "Platform / DevOps Engineer"
 tags: ["gitlab", "ci-cd", "platform-engineering", "devsecops", "governance"]
 summary: "Shared CI templates still drift. Real governance is a standard nobody can skip by accident: versioned, reusable components behind a single orchestrator that wires every mandatory security scan from one line."
